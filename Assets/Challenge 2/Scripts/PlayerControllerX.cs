@@ -3,18 +3,16 @@
 public class PlayerControllerX : MonoBehaviour
 {
     public GameObject dogPrefab;
-    private int nbFrame = 0;
-    private int maxFrame = 15;
+    private float LastTime = 0;
+    private float maxTime = 0.5f;
     // Update is called once per frame
     void Update()
     {
-
         // On spacebar press, send dog
-        if (Input.GetKeyDown(KeyCode.Space) && nbFrame > maxFrame)
+        if (Input.GetKeyDown(KeyCode.Space) && (Time.time - LastTime > maxTime))
         {
-            nbFrame = 0;
+            LastTime = Time.time;
             Instantiate(dogPrefab, transform.position, dogPrefab.transform.rotation);
         }
-        nbFrame++;
     }
 }
