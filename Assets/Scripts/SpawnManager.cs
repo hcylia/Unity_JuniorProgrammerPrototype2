@@ -17,20 +17,15 @@ public class SpawnManager : MonoBehaviour
     void SpawnRandomAnimal()
     {
         int animalIndex = Random.Range(0, animalPrefabs.Length);
-
-        int spawnSide = Random.Range(0, 3);
         Vector3 spawnPos;
-        if (spawnSide < 1)
+        if (animalPrefabs[animalIndex].transform.rotation.y == 1)
         {
             spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0, spawnPosZ);
         }
         else
         {
-
-            spawnPos = new Vector3( Mathf.Pow(-1, spawnSide) * spawnPosX, 0, Random.Range(spawnRangeY[0], spawnRangeY[1]));
+            spawnPos = new Vector3(-Mathf.Sign(animalPrefabs[animalIndex].transform.rotation.y) * spawnPosX, 0, Random.Range(spawnRangeY[0], spawnRangeY[1]));
         }
-            
-
         Instantiate(animalPrefabs[animalIndex], spawnPos, animalPrefabs[animalIndex].transform.rotation);
     }
 }
